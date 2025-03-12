@@ -1,4 +1,5 @@
 import { PageProps } from '../App';
+import ContentsButton from '../components/ContentsButton';
 
 function ContentsPage({ handleOnClick }: PageProps) {
   return (
@@ -6,9 +7,7 @@ function ContentsPage({ handleOnClick }: PageProps) {
       <button onClick={() => handleOnClick('Main')}>초기 화면으로</button>
       <h1>콘텐츠 페이지</h1>
       <h2>선택지 지문</h2>
-      <button name='firstButton'>첫번째</button>
-      <button name='SecondButton'>두번째</button>
-      <button name='ThirdButton'>세번째</button>
+      <ContentsButton map={'설원'} />
     </div>
   );
 }

@@ -3,20 +3,23 @@ import styled from 'styled-components';
 import { MyStyles, TypeKey } from '../constants/MyStyles';
 
 interface IButtonProps {
-  location: TypeKey; // location은 MyStyles 객체의 키 값이어야 한다.
+  $location: TypeKey; // location은 MyStyles 객체의 키 값이어야 한다.
 }
 
 const Button = styled.button<IButtonProps>`
-  background-color: ${({ location }) =>
-    MyStyles[location].background}; // MyStyles에서 해당 location에 맞는 background을 가져옴
-  color: ${({ location }) =>
-    MyStyles[location].color}; // MyStyles에서 해당 location에 맞는 color을 가져옴
+  display: block; /* 블록 요소로 만들어 줄바꿈 */
+  width: 70%; /* 부모의 전체 너비를 차지 */
+  margin: 0.5rem 0;
+  height: 4rem;
+  background-color: ${({ $location }) =>
+    MyStyles[$location].background}; // MyStyles에서 해당 location에 맞는 background을 가져옴
+  color: ${({ $location }) =>
+    MyStyles[$location].color}; // MyStyles에서 해당 location에 맞는 color을 가져옴
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 2rem;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  display: block;
 `;
 
 interface IProps {
@@ -31,7 +34,7 @@ function ContentsButton({ firstChoice, choice, onClick }: IProps) {
   const buttonColor = firstChoice ? firstChoice : choice;
 
   return (
-    <Button location={buttonColor as TypeKey} onClick={onClick}>
+    <Button $location={buttonColor as TypeKey} onClick={onClick}>
       {choice}
     </Button>
   );

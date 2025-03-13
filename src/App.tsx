@@ -1,32 +1,30 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import MainPage from './Pages/MainPage';
 import ContentsPage from './Pages/ContentsPage';
 import styled from 'styled-components';
 import './GlobalStyle.css';
 import { TypeKey } from './constants/MyStyles';
 
-// 상태 업데이트 함수는 void를 반환합니다.
 export interface PageProps {
   handleOnClick: (page: 'Main' | 'Contents') => void;
   handleBgImage?: (location: TypeKey) => void;
 }
+
 const Container = styled.div<{ $bgImage: string; $isLoading: boolean }>`
   display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
+  justify-content: center;
+  align-items: center;
   height: 100vh;
-  background-image: url(${({ $bgImage }) => $bgImage});
-  background-size: cover; /* 이미지가 컨테이너에 꽉 차도록 설정 */
-  background-position: center; /* 이미지가 중앙에 위치하도록 설정 */
-  background-color: ${({ $isLoading }) =>
-    $isLoading ? '#fff' : 'transparent'}; /* 로딩 중 흰색 배경 */
-  position: relative; /* 자식 요소를 절대 위치로 배치할 수 있도록 설정 */
-  /* 로딩 상태일 때 상호작용을 막음 */
+  background-image: ${({ $isLoading, $bgImage }) => ($isLoading ? 'none' : `url(${$bgImage})`)};
+  background-size: cover;
+  background-position: center;
+  background-color: ${({ $isLoading }) => ($isLoading ? '#fff' : 'transparent')};
+  position: relative;
   pointer-events: ${({ $isLoading }) => ($isLoading ? 'none' : 'auto')};
 `;
 
 const LoadingOverlay = styled.div`
-  position: absolute; /* 화면을 덮도록 절대 위치 지정 */
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -34,7 +32,7 @@ const LoadingOverlay = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.7); /* 배경이 반투명하게 */
+  background: rgba(255, 255, 255, 0.7);
   font-size: 2rem;
   color: #333;
 `;
@@ -43,30 +41,61 @@ function App() {
   const [currentPage, setCurrentPage] = useState<'Main' | 'Contents'>('Main');
   const [isLoading, setIsLoading] = useState(false); // 로딩 상태
   const [bgImage, setBgImage] = useState('img/advanture.jpg');
+  const [isImageLoaded, setIsImageLoaded] = useState(false); // 이미지 로딩 상태
+  const [preloadedImages, setPreloadedImages] = useState<string[]>([]); // 로드된 이미지 리스트
+
+  // 배경 이미지를 미리 로드(preload)하고, 로드가 완료될 때까지 로딩 화면을 표시하는 역할
+  useEffect(() => {
+    const preloadImage = (src: string) => {
+      // 이미 로드된 이미지라면 다시 로드하지 않도록 처리
+      if (preloadedImages.includes(src)) {
+        setIsImageLoaded(true); // 로딩 완료 상태로 설정
+        setIsLoading(false); // 이미지 로딩이 완료되면 로딩 상태를 false로 설정
+        return;
+      }
+
+      const img = new Image();
+      img.src = src;
+      img.onload = () => {
+        // 이미지를 로드한 후 로드된 이미지 목록에 추가하고, 로딩 상태를 변경
+        setPreloadedImages((prev) => [...prev, src]);
+        setIsImageLoaded(true);
+        setIsLoading(false); // 이미지 로딩이 완료되면 로딩 상태를 false로 설정
+      };
+    };
+
+    setIsImageLoaded(false); // 이미지 로딩 시작 전 상태를 false로 설정
+    setIsLoading(true); // 로딩 상태를 true로 설정하여 로딩 화면을 표시
+    preloadImage(bgImage); // bgImage가 변경될 때마다 미리 로딩
+  }, [preloadedImages, bgImage]);
 
   const handleOnClick: PageProps['handleOnClick'] = (page: 'Main' | 'Contents') => {
     setCurrentPage(page);
-    setBgImage('img/advanture.jpg');
+    setBgImage('img/advanture.jpg'); // 기본 이미지
   };
 
   const handleBgImage = (location: TypeKey) => {
     switch (location) {
       case '숲':
-        return setBgImage('img/forest.jpg');
+        setBgImage('img/forest.jpg');
+        break;
       case '무인도':
-        return setBgImage('img/island.jpg');
+        setBgImage('img/island.jpg');
+        break;
       case '사막':
-        return setBgImage('img/desert.jpg');
+        setBgImage('img/desert.jpg');
+        break;
       case '설원':
-        return setBgImage('img/snow.jpg');
+        setBgImage('img/snow.jpg');
+        break;
       default:
-        return setBgImage('img/advanture.jpg'); // 기본값
+        setBgImage('img/advanture.jpg');
     }
   };
 
   return (
-    <Container $bgImage={bgImage} $isLoading={isLoading}>
-      {isLoading && <LoadingOverlay>Loading...</LoadingOverlay>} {/* 로딩 중 표시 */}
+    <Container $bgImage={bgImage} $isLoading={!isImageLoaded}>
+      {isLoading && <LoadingOverlay>Loading...</LoadingOverlay>}
       {currentPage === 'Main' ? (
         <MainPage handleOnClick={handleOnClick} />
       ) : (

@@ -4,7 +4,7 @@ import MainPage from './Pages/MainPage';
 import ContentsPage from './Pages/ContentsPage';
 import styled from 'styled-components';
 import './GlobalStyle.css';
-import { TypeKey } from './constants/MyStyles';
+import { TypeKey } from './constants';
 
 export interface PageProps {
   handleOnClick: (page: 'Main' | 'Contents') => void;

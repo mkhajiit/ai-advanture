@@ -22,5 +22,9 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "backend/function/endingPromptCaller.ts",
+    "backend/function/normalPromptCaller.ts"
+  ]
 }

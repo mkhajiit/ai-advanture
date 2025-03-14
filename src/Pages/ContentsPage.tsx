@@ -3,8 +3,9 @@
 import { useState } from 'react';
 import { PageProps } from '../App';
 import ContentsButton from '../components/ContentsButton';
-import { MyStyles, TypeKey } from '../constants/MyStyles';
+import { MyStyles, TypeKey } from '../constants';
 import styled from 'styled-components';
+import { fetchStroy } from '../function/fetchStory';
 
 const Container = styled.div``;
 
@@ -29,12 +30,21 @@ function ContentsPage({ handleOnClick, handleBgImage }: PageProps) {
   const initialText = '모험을 떠날 장소를 선택하세요';
   const [text, setText] = useState(initialText);
   const [choices, setChoices] = useState(initialChoices);
+  const [selectedChoices, setSelectedChoices] = useState<string[]>([]);
   const [firstChoice, setFirstChoice] = useState<TypeKey | null>(null);
-  const [stage, setStage] = useState(1);
+  const [stage, setStage] = useState(0);
+  const [isLastStage, setIsLastStage] = useState(false);
+  // 탐험 장소 초기 선택지 제외한 스테이지수
+  const maxStage = 4;
+  const numberOfSelection = 5;
 
   // 첫 번째 선택지를 클릭했을 때 선택된 색상을 저장
-  const handleChoiceClick = (choice: string) => {
-    if (stage === 1) {
+  const handleChoiceClick = async (choice: string) => {
+    // 상태를 바로 통신에 사용하면 비동기적으로 실행되기 때문에 상태 업데이트 전에 이전 값이 넘어가서 변수를 따로 설정해서 쓸 것
+    const updatedChoices = [...selectedChoices, choice];
+    setSelectedChoices(updatedChoices);
+
+    if (stage === 0) {
       setFirstChoice(choice as TypeKey);
       if (handleBgImage) {
         // handleBgImage가 undefined가 아니면 호출 undefined일때 예외처리
@@ -42,7 +52,17 @@ function ContentsPage({ handleOnClick, handleBgImage }: PageProps) {
         handleBgImage(choice as TypeKey);
       }
     }
-    setStage((prev) => prev + 1);
+    if (stage === maxStage) {
+      // 마지막 스테이지에 도달한 경우
+      setIsLastStage(true);
+    } else {
+      // 마지막 스테이지가 아닐 경우, 스테이지를 증가시킴
+      setStage((prev) => prev + 1);
+    }
+    const response = await fetchStroy(choice, isLastStage, updatedChoices, numberOfSelection);
+    console.log(response);
+    setText(response.text);
+    setChoices(response.choices);
   };
 
   return (
@@ -51,14 +71,16 @@ function ContentsPage({ handleOnClick, handleBgImage }: PageProps) {
       <Container>
         <TextContainer $firstChoice={firstChoice}>{text}</TextContainer>
         <ButtonContainer>
-          {choices.map((choice, index) => (
-            <ContentsButton
-              key={index}
-              firstChoice={firstChoice}
-              choice={choice}
-              onClick={() => handleChoiceClick(choice)}
-            />
-          ))}
+          {isLastStage
+            ? ''
+            : choices.map((choice, index) => (
+                <ContentsButton
+                  key={index}
+                  firstChoice={firstChoice}
+                  choice={choice}
+                  onClick={() => handleChoiceClick(choice)}
+                />
+              ))}
         </ButtonContainer>
       </Container>
     </div>

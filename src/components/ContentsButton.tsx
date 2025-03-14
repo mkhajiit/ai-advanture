@@ -1,6 +1,6 @@
 // 타입 꼭 복습
 import styled from 'styled-components';
-import { MyStyles, TypeKey } from '../constants/MyStyles';
+import { MyStyles, TypeKey } from '../constants';
 
 interface IButtonProps {
   $location: TypeKey; // location은 MyStyles 객체의 키 값이어야 한다.

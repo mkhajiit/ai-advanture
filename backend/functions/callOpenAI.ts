@@ -32,7 +32,6 @@ async function callOpenAI(prompt: string): Promise<string | undefined> {
       const content = response.data.choices[0].message.content.trim();
       // Axios가 JSON을 파싱하는 것은 첫 번째 수준의 JSON 객체만 처리하고,
       // 만약 안에 문자열 형태의 JSON 객체가 포함되면 이를 문자열로 보고 처리하지 않습니다.
-      console.log(content);
       const parsedContent = JSON.parse(content);
       console.log(parsedContent);
       return parsedContent;

@@ -5,7 +5,7 @@ export function normalPromptCaller(userChoices: string[], numberOfSelection: num
       이야기 진행은 지금까지 선택한 선택지를 바탕으로 진행되어야 합니다
 
       사용자가 지금까지 선택한 선택지: ${userChoices.join(' -> ')}
-      요구되는 선택지 숫자: ${numberOfSelection}개
+      당신이 만들어야 할 선택지 숫자: ${numberOfSelection}개 입니다.
 
       응답 예시:
       {

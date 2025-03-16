@@ -26,7 +26,7 @@ const ButtonContainer = styled.div`
   width: 100%; /* 부모 컨테이너도 전체 너비 사용 */
 `;
 
-function ContentsPage({ handleOnClick, handleBgImage }: PageProps) {
+function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) {
   const initialChoices = ['숲', '무인도', '사막', '설원'];
   const initialText = '모험을 떠날 장소를 선택하세요';
   //상태
@@ -79,7 +79,7 @@ function ContentsPage({ handleOnClick, handleBgImage }: PageProps) {
 
   return (
     <>
-      {isLoading ? (
+      {isLoading || isBgLoading ? (
         <CommuLoadingPage />
       ) : (
         <div>

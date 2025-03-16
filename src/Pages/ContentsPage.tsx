@@ -38,8 +38,8 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
   const [isLoading, setIsLoading] = useState(false);
   const [isLastStage, setIsLastStage] = useState(false);
 
-  // 결말 스테이지 제외한 스테이지수(선택지 스테이지의 숫자)
-  const maxSelectStage = 5;
+  // 결말 스테이지 포함한 스테이지의 갯수
+  const mayStage = 7;
   // ai가 출력할 선택지 갯수
   const numberOfSelection = 4;
 
@@ -58,7 +58,7 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
       }
     }
 
-    const isLastStage = stage === maxSelectStage;
+    const isLastStage = stage === mayStage - 1;
     setIsLastStage(isLastStage);
 
     // 마지막 스테이지가 아닐 경우, 스테이지를 증가시킴

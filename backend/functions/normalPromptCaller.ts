@@ -8,6 +8,7 @@ export function normalPromptCaller(userChoices: string[], numberOfSelection: num
       당신이 만들어야 할 선택지 숫자: ${numberOfSelection}개 입니다. 반드시 이 갯수만큼 선택지를 만드세요
       
 
+      단순한 방향 보다 다이나믹한 상황이 포함되도록 해주세요!
       응답 예시:
       {
         "text": "당신은 어두운 숲 속에서 이상한 소리를 들었다.",

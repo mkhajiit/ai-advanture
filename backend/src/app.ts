@@ -20,7 +20,8 @@ app.post('/generate-story', async (req, res) => {
   console.log('지금까지의 선택지:', selectedChoices);
   console.log('선택지갯수:', numberOfSelection);
   if (isLast) {
-    prompt = endingPromptCaller(selectedChoices, numberOfSelection);
+    prompt = endingPromptCaller(selectedChoices);
+    console.log('엔딩 프롬프트 사용');
   } else {
     prompt = normalPromptCaller(selectedChoices, numberOfSelection);
   }

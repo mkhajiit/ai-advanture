@@ -26,20 +26,6 @@ const Container = styled.div<{ $bgImage: string; $isBgLoading: boolean }>`
   pointer-events: ${({ $isBgLoading }) => ($isBgLoading ? 'none' : 'auto')};
 `;
 
-// const LoadingOverlay = styled.div`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   right: 0;
-//   bottom: 0;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   background: rgba(255, 255, 255, 0.7);
-//   font-size: 2rem;
-//   color: #333;
-// `;
-
 function App() {
   const [currentPage, setCurrentPage] = useState<'Main' | 'Contents'>('Main');
   const [isBgLoading, setIsBgLoading] = useState(false); // 로딩 상태

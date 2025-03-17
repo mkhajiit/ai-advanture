@@ -29,13 +29,10 @@ app.use(express.json());
 
 // OPTIONS 요청을 처리하는 미들웨어 (CORS 헤더 설정)
 app.options('*', (req, res) => {
-  res.setHeader(
-    'Access-Control-Allow-Origin',
-    'https://ai-advanture-416oq1rrm-mkhajiits-projects.vercel.app'
-  );
+  res.setHeader('Access-Control-Allow-Origin', '*'); // 또는 특정 도메인
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.sendStatus(204); // 204 No Content 응답
+  res.sendStatus(204); // No Content 응답
 });
 
 app.post('/generate-story', async (req, res) => {
@@ -50,6 +47,8 @@ app.post('/generate-story', async (req, res) => {
     prompt = normalPromptCaller(selectedChoices, numberOfSelection);
   }
   const response = await callOpenAI(prompt);
+  // 요청 처리 로직
+  res.setHeader('Access-Control-Allow-Origin', '*'); // 여기서 모든 도메인 허용
   res.send({ message: '성공적으로 처리되었습니다.', story: response });
 });
 

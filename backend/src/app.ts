@@ -8,25 +8,13 @@ dotenv.config();
 
 const app = express();
 // RailWay에서 제공해주는 public domain 없으면 로컬환경 5000번 포트에서
-console.log(process.env.PORT);
 const port = process.env.PORT || 5000;
 const baseUrl = process.env.PORT
   ? `https://ai-advanture-production.up.railway.app:${process.env.PORT}`
   : `http://localhost:${port}`;
 let prompt: string;
 
-// CORS 옵션 설정
-const corsOptions = {
-  origin: [
-    'http://localhost:5173', // 로컬 환경에서 요청을 허용
-    'https://ai-advanture-416oq1rrm-mkhajiits-projects.vercel.app', // Vercel 배포 도메인 허용
-  ],
-  methods: ['GET', 'POST'], // 허용할 HTTP 메서드
-  allowedHeaders: ['Content-Type', 'Authorization'], // 허용할 헤더
-  credentials: true, // 클라이언트에서 쿠키를 보내려면 이 옵션을 추가
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 // JSON 형식의 요청 본문을 파싱(parsing) 하기 위한 미들웨어
 app.use(express.json());
 

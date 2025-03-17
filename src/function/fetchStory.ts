@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const port = import.meta.env.VITE_ENDPOINT_URL || 5000;
-const baseUrl = port === 5000 ? `http://localhost:${port}` : `https://${port}`;
+// const port = import.meta.env.VITE_ENDPOINT_URL || 5000;
+// const baseUrl = port === 5000 ? `http://localhost:${port}` : `https://${port}`;
 
 export async function fetchStroy(
   choice: string,
@@ -13,7 +13,7 @@ export async function fetchStroy(
   try {
     setIsLoading(true);
     const { data } = await axios.post(
-      `${baseUrl}/generate-story`,
+      'https://localhost:5000/generate-story',
       {
         choice,
         isLast,

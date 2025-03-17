@@ -13,7 +13,16 @@ const baseUrl =
   port === 5000 ? `http://localhost:${port}` : `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`;
 let prompt: string;
 
-app.use(cors());
+const corsOptions = {
+  origin: [
+    'http://localhost:5173', // 프론트 로컬 환경에서 요청을 허용
+    'https://ai-advanture-416oq1rrm-mkhajiits-projects.vercel.app', // Vercel 배포 도메인 허용
+  ],
+  methods: ['GET', 'POST'], // 허용할 HTTP 메서드
+  allowedHeaders: ['Content-Type'], // 허용할 헤더
+};
+
+app.use(cors(corsOptions));
 // JSON 형식의 요청 본문을 파싱(parsing) 하기 위한 미들웨어
 app.use(express.json());
 

@@ -13,7 +13,7 @@ export async function fetchStroy(
   try {
     setIsLoading(true);
     const { data } = await axios.post(
-      'https://localhost:5000/generate-story',
+      'http://localhost:5000/generate-story',
       {
         choice,
         isLast,

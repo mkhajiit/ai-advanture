@@ -8,10 +8,10 @@ dotenv.config();
 
 const app = express();
 // RailWay에서 제공해주는 public domain 없으면 로컬환경 5000번 포트에서
-const port = process.env.PORT || 5000;
-const baseUrl = process.env.PORT
-  ? `https://ai-advanture-production.up.railway.app:${process.env.PORT}`
-  : `http://localhost:${port}`;
+// const port = process.env.PORT || 5000;
+// const baseUrl = process.env.PORT
+//   ? `https://ai-advanture-production.up.railway.app:${process.env.PORT}`
+//   : `http://localhost:${port}`;
 let prompt: string;
 
 app.use(cors());
@@ -34,6 +34,6 @@ app.post('/generate-story', async (req, res) => {
   res.send({ message: '성공적으로 처리되었습니다.', story: response });
 });
 
-app.listen(port, () => {
-  console.log(`서버가 ${baseUrl}에서 실행 중`);
+app.listen(process.env.PORT, () => {
+  console.log(`서버가 ${process.env.POR}에서 실행 중`);
 });

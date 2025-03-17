@@ -29,10 +29,13 @@ app.use(express.json());
 
 // OPTIONS 요청을 처리하는 미들웨어 (CORS 헤더 설정)
 app.options('*', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader(
+    'Access-Control-Allow-Origin',
+    'https://ai-advanture-416oq1rrm-mkhajiits-projects.vercel.app'
+  );
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.send();
+  res.sendStatus(204); // 204 No Content 응답
 });
 
 app.post('/generate-story', async (req, res) => {

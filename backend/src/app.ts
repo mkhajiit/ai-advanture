@@ -35,5 +35,5 @@ app.post('/generate-story', async (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-  console.log(`서버가 ${process.env.POR}에서 실행 중`);
+  console.log(`서버가 ${process.env.PORT}에서 실행 중`);
 });

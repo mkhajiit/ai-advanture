@@ -10,7 +10,9 @@ const app = express();
 // RailWay에서 제공해주는 public domain 없으면 로컬환경 5000번 포트에서
 console.log(process.env.PORT);
 const port = process.env.PORT || 5000;
-const baseUrl = process.env.PORT ? `https://${process.env.PORT}` : `http://localhost:${port}`;
+const baseUrl = process.env.PORT
+  ? `https://ai-advanture-production.up.railway.app:${process.env.PORT}`
+  : `http://localhost:${port}`;
 let prompt: string;
 
 // CORS 옵션 설정

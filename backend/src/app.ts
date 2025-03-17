@@ -9,6 +9,8 @@ dotenv.config();
 const app = express();
 // RailWay에서 제공해주는 public domain 없으면 로컬환경 5000번 포트에서
 const port = process.env.RAILWAY_PUBLIC_DOMAIN || 5000;
+const baseUrl =
+  port === 5000 ? `http://localhost:${port}` : `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`;
 let prompt: string;
 
 app.use(cors());
@@ -30,6 +32,6 @@ app.post('/generate-story', async (req, res) => {
   res.send({ message: '성공적으로 처리되었습니다.', story: response });
 });
 
-app.listen(port, () => {
-  console.log(`서버가 http://localhost:${port}에서 실행 중`);
+app.listen(baseUrl, () => {
+  console.log(`서버가 ${baseUrl}에서 실행 중`);
 });

@@ -13,15 +13,12 @@ export async function fetchStroy(
   try {
     setIsLoading(true);
     const { data } = await axios.post(
-      'https://ai-advanture-production.up.railway.app:8080/generate-story',
+      'https://ai-advanture-production.up.railway.app/generate-story',
       {
         choice,
         isLast,
         selectedChoices,
         numberOfSelection,
-      },
-      {
-        withCredentials: true, // 이 옵션을 추가해서 CORS 요청에 credentials을 포함시킴
       }
     );
     console.log(data.story); // 방금 그 객체 나옴

@@ -27,6 +27,14 @@ app.use(cors(corsOptions));
 // JSON 형식의 요청 본문을 파싱(parsing) 하기 위한 미들웨어
 app.use(express.json());
 
+// OPTIONS 요청을 처리하는 미들웨어 (CORS 헤더 설정)
+app.options('*', (req, res) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.send();
+});
+
 app.post('/generate-story', async (req, res) => {
   const { choice, isLast, selectedChoices, numberOfSelection } = req.body;
   console.log(choice, isLast);

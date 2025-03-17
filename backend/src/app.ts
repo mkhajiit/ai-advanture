@@ -7,8 +7,8 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const port = 5000;
-let prompt;
+const port = process.env.PORT || 5000;
+let prompt: string;
 
 app.use(cors());
 // JSON 형식의 요청 본문을 파싱(parsing) 하기 위한 미들웨어

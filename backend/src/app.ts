@@ -21,13 +21,15 @@ const corsOptions = {
     'https://ai-advanture-416oq1rrm-mkhajiits-projects.vercel.app', // Vercel 배포 도메인 허용
   ],
   methods: ['GET', 'POST'], // 허용할 HTTP 메서드
-  allowedHeaders: ['Content-Type'], // 허용할 헤더
+  allowedHeaders: ['Content-Type', 'Authorization'], // 허용할 헤더
   credentials: true, // 클라이언트에서 쿠키를 보내려면 이 옵션을 추가
 };
 
 app.use(cors(corsOptions));
 // JSON 형식의 요청 본문을 파싱(parsing) 하기 위한 미들웨어
 app.use(express.json());
+
+app.options('*', cors(corsOptions));
 
 app.post('/generate-story', async (req, res) => {
   const { choice, isLast, selectedChoices, numberOfSelection } = req.body;

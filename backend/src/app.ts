@@ -8,6 +8,7 @@ dotenv.config();
 
 const app = express();
 // RailWay에서 제공해주는 public domain 없으면 로컬환경 5000번 포트에서
+console.log(process.env.RAILWAY_PUBLIC_DOMAIN);
 const port = process.env.RAILWAY_PUBLIC_DOMAIN || 5000;
 const baseUrl = process.env.RAILWAY_PUBLIC_DOMAIN
   ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`

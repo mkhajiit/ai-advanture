@@ -7,7 +7,8 @@ import cors from 'cors';
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || 5000;
+// RailWay에서 제공해주는 public domain 없으면 로컬환경 5000번 포트에서
+const port = process.env.RAILWAY_PUBLIC_DOMAIN || 5000;
 let prompt: string;
 
 app.use(cors());

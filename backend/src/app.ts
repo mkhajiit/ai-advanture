@@ -20,6 +20,7 @@ const corsOptions = {
   ],
   methods: ['GET', 'POST'], // 허용할 HTTP 메서드
   allowedHeaders: ['Content-Type'], // 허용할 헤더
+  credentials: true, // 클라이언트에서 쿠키를 보내려면 이 옵션을 추가
 };
 
 app.use(cors(corsOptions));

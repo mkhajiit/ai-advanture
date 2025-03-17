@@ -9,7 +9,7 @@ export async function fetchStroy(
 ) {
   try {
     setIsLoading(true);
-    const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/generate-story`, {
+    const { data } = await axios.post(`${import.meta.env.VITE_ENDPOINT_URL}/generate-story`, {
       choice,
       isLast,
       selectedChoices,

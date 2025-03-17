@@ -9,8 +9,9 @@ dotenv.config();
 const app = express();
 // RailWay에서 제공해주는 public domain 없으면 로컬환경 5000번 포트에서
 const port = process.env.RAILWAY_PUBLIC_DOMAIN || 5000;
-const baseUrl =
-  port === 5000 ? `http://localhost:${port}` : `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`;
+const baseUrl = process.env.RAILWAY_PUBLIC_DOMAIN
+  ? `https://${process.env.RAILWAY_PUBLIC_DOMAIN}`
+  : `http://localhost:${port}`;
 let prompt: string;
 
 // CORS 옵션 설정
@@ -19,24 +20,14 @@ const corsOptions = {
     'http://localhost:5173', // 로컬 환경에서 요청을 허용
     'https://ai-advanture-416oq1rrm-mkhajiits-projects.vercel.app', // Vercel 배포 도메인 허용
   ],
-  methods: ['GET', 'POST', 'OPTIONS'], // 허용할 HTTP 메서드
+  methods: ['GET', 'POST'], // 허용할 HTTP 메서드
   allowedHeaders: ['Content-Type'], // 허용할 헤더
   credentials: true, // 클라이언트에서 쿠키를 보내려면 이 옵션을 추가
 };
 
 app.use(cors(corsOptions));
-
 // JSON 형식의 요청 본문을 파싱(parsing) 하기 위한 미들웨어
 app.use(express.json());
-
-// OPTIONS 요청을 명시적으로 처리
-app.options('/generate-story', (req, res) => {
-  res.setHeader('Access-Control-Allow-Origin', '*'); // 모든 도메인 허용
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // 허용할 HTTP 메서드
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // 허용할 헤더
-  res.setHeader('Access-Control-Allow-Credentials', 'true'); // 쿠키 허용
-  res.sendStatus(204); // No Content 응답
-});
 
 app.post('/generate-story', async (req, res) => {
   const { choice, isLast, selectedChoices, numberOfSelection } = req.body;
@@ -51,10 +42,6 @@ app.post('/generate-story', async (req, res) => {
   }
   const response = await callOpenAI(prompt);
   // 요청 처리 로직
-  res.setHeader('Access-Control-Allow-Origin', '*'); // 모든 도메인 허용
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS'); // 허용할 HTTP 메서드
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type'); // 허용할 헤더
-  res.setHeader('Access-Control-Allow-Credentials', 'true'); // 쿠키 허용
   res.send({ message: '성공적으로 처리되었습니다.', story: response });
 });
 

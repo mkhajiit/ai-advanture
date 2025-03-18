@@ -44,6 +44,11 @@ express
 
 가끔 gpt가 답을 못 내놓는 버그가 발생했을때 처음으로 복귀시키고 안내하는 화면이 필요함
 
+배포 과정에서 CORS 에러와 서버와 통신을 못하는 에러가 발생해서 3시간 정도 소모함
+원인: 서버 배포 사이트인 RAILWAY에서 제공하는 URL은 프론트에서 뒤에 포트번호(:8080)을 붙이면 안됨 이미 포트번호가 할당되어 있는 url 이기 때문임
+(ai-advanture-production.up.railway.app/generate-story) 이런식으로 해야함
+배포중인 사이트:https://ai-advanture-git-main-mkhajiits-projects.vercel.app/
+
 == 보안 ==
 
 api_key가 포함된 통신을 프론트에서 하면 환경변수를 사용해도 유출될 위험이 크다.

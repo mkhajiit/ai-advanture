@@ -4,11 +4,10 @@ import MainPage from './Pages/MainPage';
 import ContentsPage from './Pages/ContentsPage';
 import styled from 'styled-components';
 import './GlobalStyle.css';
-import { TypeKey } from './constants';
 
 export interface PageProps {
   handleOnClick: (page: 'Main' | 'Contents') => void;
-  handleBgImage?: (location: TypeKey, imgNumber: number) => void;
+  handleBgImage?: (location: string, imgNumber: number) => void;
   isBgLoading?: boolean;
 }
 

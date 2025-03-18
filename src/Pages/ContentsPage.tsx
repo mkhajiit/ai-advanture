@@ -57,7 +57,7 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
       if (handleBgImage) {
         // handleBgImage가 undefined가 아니면 호출 undefined일때 예외처리
         // 처음 스테이지 선택에 따라서 이미지를 바꿈
-        handleBgImage(choice as TypeKey, imgNumber);
+        handleBgImage(choice, imgNumber);
       }
     }
 

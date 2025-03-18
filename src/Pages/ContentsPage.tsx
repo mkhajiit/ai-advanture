@@ -16,7 +16,7 @@ const TextContainer = styled.div<{ $firstChoice: TypeKey | null }>`
   align-items: center; /* 세로 중앙 정렬 */
   margin: 4rem 2rem;
   font-size: 2rem;
-  color: ${({ $firstChoice }) => ($firstChoice ? MyStyles[$firstChoice].color : 'black')};
+  color: ${({ $firstChoice }) => ($firstChoice ? MyStyles[`${$firstChoice}`].textColor : 'black')};
 `;
 
 const ButtonContainer = styled.div`
@@ -27,6 +27,8 @@ const ButtonContainer = styled.div`
 `;
 
 function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) {
+  // 페이지 컴포넌트가 바뀌어서 컴포넌트가 리렌더링 될때마다 바뀜
+  const imgNumber = Math.floor(Math.random() * 2 + 1);
   const initialChoices = ['숲', '무인도', '사막', '설원'];
   const initialText = '모험을 떠날 장소를 선택하세요';
   //상태
@@ -50,11 +52,12 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
     setSelectedChoices(updatedChoices);
 
     if (stage === 1) {
-      setFirstChoice(choice as TypeKey);
+      const btnTheme = `${choice}${imgNumber}`;
+      setFirstChoice(btnTheme as TypeKey);
       if (handleBgImage) {
         // handleBgImage가 undefined가 아니면 호출 undefined일때 예외처리
         // 처음 스테이지 선택에 따라서 이미지를 바꿈
-        handleBgImage(choice as TypeKey);
+        handleBgImage(choice as TypeKey, imgNumber);
       }
     }
 
@@ -95,6 +98,7 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
                       firstChoice={firstChoice}
                       choice={choice}
                       onClick={() => handleChoiceClick(choice)}
+                      imgNumber={imgNumber}
                     />
                   ))}
             </ButtonContainer>

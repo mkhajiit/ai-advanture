@@ -8,7 +8,7 @@ import { TypeKey } from './constants';
 
 export interface PageProps {
   handleOnClick: (page: 'Main' | 'Contents') => void;
-  handleBgImage?: (location: TypeKey) => void;
+  handleBgImage?: (location: TypeKey, imgNumber: number) => void;
   isBgLoading?: boolean;
 }
 
@@ -32,7 +32,6 @@ function App() {
   const [bgImage, setBgImage] = useState('img/advanture.jpg');
   const [isImageLoaded, setIsImageLoaded] = useState(false); // 이미지 로딩 상태
   const [preloadedImages, setPreloadedImages] = useState<string[]>([]); // 로드된 이미지 리스트(캐시)
-  const imgNumber = Math.floor(Math.random() * 2 + 1);
 
   // 배경 이미지를 미리 로드(preload)하고, 로드가 완료될 때까지 로딩 화면을 표시하는 역할
   useEffect(() => {
@@ -67,7 +66,7 @@ function App() {
     setBgImage('img/advanture.jpg'); // 기본 이미지
   };
 
-  const handleBgImage = (location: TypeKey) => {
+  const handleBgImage = (location: string, imgNumber: number) => {
     switch (location) {
       case '숲':
         setBgImage(`img/forest${imgNumber}.jpg`);

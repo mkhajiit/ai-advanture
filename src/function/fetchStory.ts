@@ -19,7 +19,6 @@ export async function fetchStroy(
       numberOfSelection,
     });
     console.log(data.story); // 방금 그 객체 나옴
-    console.log(data.story.text); // undefined 나옴
     return data.story;
   } catch (error) {
     console.log('오류 메시지:', error);

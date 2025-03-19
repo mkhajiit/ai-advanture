@@ -8,7 +8,10 @@ import styled from 'styled-components';
 import { fetchStroy } from '../function/fetchStory';
 import CommuLoadingPage from './CommuLoadingPage';
 
-const Container = styled.div``;
+interface IResponse {
+  text: string;
+  choices: string[];
+}
 
 const TextContainer = styled.div<{ $firstChoice: TypeKey | null }>`
   display: flex;
@@ -49,20 +52,9 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
   const handleChoiceClick = async (choice: string) => {
     // 상태를 바로 통신에 사용하면 비동기적으로 실행되기 때문에 상태 업데이트 전에 이전 값이 넘어가서 변수를 따로 설정해서 쓸 것
     const updatedChoices = [...selectedChoices, choice];
-    setSelectedChoices(updatedChoices);
-
-    if (stage === 1) {
-      const btnTheme = `${choice}${imgNumber}`;
-      setFirstChoice(btnTheme as TypeKey);
-      if (handleBgImage) {
-        // handleBgImage가 undefined가 아니면 호출 undefined일때 예외처리
-        // 처음 스테이지 선택에 따라서 이미지를 바꿈
-        handleBgImage(choice, imgNumber);
-      }
-    }
-
     const isLastStage = stage === mayStage - 1;
-    setIsLastStage(isLastStage);
+
+    updateStateBeforeFetch(choice, updatedChoices, isLastStage);
 
     // 마지막 스테이지가 아닐 경우, 스테이지를 증가시킴
     const response = await fetchStroy(
@@ -72,10 +64,33 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
       numberOfSelection,
       setIsLoading
     );
-    // console.log(response);
-    setText(response.text);
-    setChoices(response.choices);
 
+    updateStateAfterFetch(response);
+  };
+
+  const updateStateBeforeFetch = (
+    choice: string,
+    updatedChoices: string[],
+    isLastStage: boolean
+  ) => {
+    setSelectedChoices(updatedChoices);
+    setIsLastStage(isLastStage);
+
+    if (stage === 1) {
+      handleFirstStageChoice(choice);
+    }
+  };
+
+  const handleFirstStageChoice = (choice: string) => {
+    const btnTheme = `${choice}${imgNumber}`;
+    setFirstChoice(btnTheme as TypeKey);
+    handleBgImage?.(choice, imgNumber);
+  };
+
+  const updateStateAfterFetch = (response: IResponse) => {
+    setText(response.text);
+    // choices가 undefined일때 빈배열 할당함(마지막 통신의 경우)
+    setChoices(response.choices ?? []);
     setStage((prev) => prev + 1);
   };
 
@@ -87,22 +102,20 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
         <div>
           <button onClick={() => handleOnClick('Main')}>초기 화면으로</button>
           <h1>{`현재 스테이지: ${stage}`}</h1>
-          <Container>
-            <TextContainer $firstChoice={firstChoice}>{text}</TextContainer>
-            <ButtonContainer>
-              {isLastStage
-                ? ''
-                : choices.map((choice, index) => (
-                    <ContentsButton
-                      key={index}
-                      firstChoice={firstChoice}
-                      choice={choice}
-                      onClick={() => handleChoiceClick(choice)}
-                      imgNumber={imgNumber}
-                    />
-                  ))}
-            </ButtonContainer>
-          </Container>
+          <TextContainer $firstChoice={firstChoice}>{text}</TextContainer>
+          <ButtonContainer>
+            {isLastStage
+              ? ''
+              : choices.map((choice, index) => (
+                  <ContentsButton
+                    key={index}
+                    firstChoice={firstChoice}
+                    choice={choice}
+                    onClick={() => handleChoiceClick(choice)}
+                    imgNumber={imgNumber}
+                  />
+                ))}
+          </ButtonContainer>
         </div>
       )}
     </>

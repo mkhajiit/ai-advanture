@@ -3,31 +3,17 @@
 import { useState } from 'react';
 import { PageProps } from '../App';
 import ContentsButton from '../components/ContentsButton';
-import { MyStyles, TypeKey } from '../constants';
-import styled from 'styled-components';
+import { TypeKey } from '../constants';
+import { TextContainer, ButtonContainer } from '../styles/Container';
 import { fetchStroy } from '../function/fetchStory';
 import CommuLoadingPage from './CommuLoadingPage';
+import { ContentsContainer } from '../styles/ContentsContainer';
+import { HomeButton } from '../styles/HomeButton';
 
 interface IResponse {
   text: string;
   choices: string[];
 }
-
-const TextContainer = styled.div<{ $firstChoice: TypeKey | null }>`
-  display: flex;
-  justify-content: center; /* 가로 중앙 정렬 */
-  align-items: center; /* 세로 중앙 정렬 */
-  margin: 4rem 2rem;
-  font-size: 2rem;
-  color: ${({ $firstChoice }) => ($firstChoice ? MyStyles[`${$firstChoice}`].textColor : 'black')};
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-direction: column; /* 버튼을 세로로 나열 */
-  align-items: center; /* 세로 중앙 정렬 */
-  width: 100%; /* 부모 컨테이너도 전체 너비 사용 */
-`;
 
 function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) {
   // 페이지 컴포넌트가 바뀌어서 컴포넌트가 리렌더링 될때마다 바뀜
@@ -101,9 +87,11 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
       {isLoading || isBgLoading ? (
         <CommuLoadingPage />
       ) : (
-        <div>
-          <button onClick={() => handleOnClick('Main')}>초기 화면으로</button>
-          <h1>{`현재 스테이지: ${stage}`}</h1>
+        <ContentsContainer>
+          <HomeButton onClick={() => handleOnClick('Main')}>
+            <i className='bi bi-house'>홈으로</i>
+          </HomeButton>
+          {/* <h1>{`현재 스테이지: ${stage}`}</h1>  디버그용*/}
           <TextContainer $firstChoice={firstChoice}>{text}</TextContainer>
           <ButtonContainer>
             {isLastStage
@@ -118,7 +106,7 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
                   />
                 ))}
           </ButtonContainer>
-        </div>
+        </ContentsContainer>
       )}
     </>
   );

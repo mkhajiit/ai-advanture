@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import MainPage from './Pages/MainPage';
 import ContentsPage from './Pages/ContentsPage';
 import styled from 'styled-components';
+// 임포트만 해도 적용
 import './GlobalStyle.css';
 
 export interface PageProps {

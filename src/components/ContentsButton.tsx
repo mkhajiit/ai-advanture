@@ -8,7 +8,7 @@ interface IButtonProps {
 
 const Button = styled.button<IButtonProps>`
   display: block; /* 블록 요소로 만들어 줄바꿈 */
-  width: 70%; /* 부모의 전체 너비를 차지 */
+  width: 80%;
   margin: 0.5rem 0;
   height: 4rem;
   background-color: ${({ $location }) =>
@@ -16,10 +16,30 @@ const Button = styled.button<IButtonProps>`
   color: ${({ $location }) =>
     MyStyles[$location].btnColor}; // MyStyles에서 해당 location에 맞는 color을 가져옴
   padding: 10px 20px;
-  font-size: 2rem;
+  font-size: 1rem;
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  overflow: hidden;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  // 테블릿과 모바일 가로모드
+  @media (min-width: 480px) {
+    font-size: 0.8rem;
+  }
+
+  // 화면 크기가 768px 이상일 때
+  @media (min-width: 768px) {
+    font-size: 1.5rem;
+  }
 `;
 
 interface IProps {

@@ -24,6 +24,7 @@ const Container = styled.div<{ $bgImage: string; $isBgLoading: boolean }>`
   background-color: ${({ $isBgLoading }) => ($isBgLoading ? '#fff' : 'transparent')};
   position: relative;
   pointer-events: ${({ $isBgLoading }) => ($isBgLoading ? 'none' : 'auto')};
+  overflow: hidden;
 `;
 
 function App() {

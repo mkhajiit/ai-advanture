@@ -34,6 +34,7 @@ function App() {
 
   // 배경 이미지를 미리 로드(preload)하고, 로드가 완료될 때까지 로딩 화면을 표시하는 역할
   useEffect(() => {
+    // 재사용 없어서 useEffect 내부에 선언한 함수
     const preloadImage = (src: string) => {
       setIsImageLoaded(false); // 이미지 로딩 시작 전 상태를 false로 설정
       setIsBgLoading(true); // 로딩 상태를 true로 설정하여 로딩 화면을 표시

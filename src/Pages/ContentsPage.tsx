@@ -68,6 +68,7 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
     updateStateAfterFetch(response);
   };
 
+  // 통신전에 업데이트 해야하는 상태를 다루는 함수
   const updateStateBeforeFetch = (
     choice: string,
     updatedChoices: string[],
@@ -87,6 +88,7 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
     handleBgImage?.(choice, imgNumber);
   };
 
+  // 통신 후에 업데이트 해야하는 상태를 다루는 함수
   const updateStateAfterFetch = (response: IResponse) => {
     setText(response.text);
     // choices가 undefined일때 빈배열 할당함(마지막 통신의 경우)

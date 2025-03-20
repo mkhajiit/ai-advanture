@@ -8,8 +8,6 @@ async function callOpenAI(prompt: string): Promise<string | undefined> {
   const retries = 3;
   let attempt = 0; // 시도 횟수 초기화
 
-  console.log(process.env.OPENAI_API_KEY);
-
   while (attempt < retries) {
     try {
       const response = await axios.post(
@@ -28,7 +26,6 @@ async function callOpenAI(prompt: string): Promise<string | undefined> {
         }
       );
 
-      // console.log(response.data.choices[0].message.content);
       const content = response.data.choices[0].message.content.trim();
       // Axios가 JSON을 파싱하는 것은 첫 번째 수준의 JSON 객체만 처리하고,
       // 만약 안에 문자열 형태의 JSON 객체가 포함되면 이를 문자열로 보고 처리하지 않습니다.

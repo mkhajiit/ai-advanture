@@ -1,3 +1,4 @@
+// 홈 버튼 스타일드 컴포넌트
 import styled from 'styled-components';
 
 export const HomeButton = styled.button`

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { MyStyles, TypeKey } from '../constants';
 
-//MyStyles의 객체를 보고 원하는 색의 테마를 정하는 컨테이너
+//MyStyles의 객체를 보고 원하는 색의 테마를 정하는 텍스트 컨테이너
 export const TextContainer = styled.div<{ $firstChoice: TypeKey | null }>`
   width: 90%;
   display: flex;
@@ -23,6 +23,7 @@ export const TextContainer = styled.div<{ $firstChoice: TypeKey | null }>`
   }
 `;
 
+//컨탠츠 버튼 컨테이너
 export const ButtonContainer = styled.div`
   display: flex;
   flex-direction: column; /* 기본적으로 버튼들이 세로로 배치되도록 설정 */

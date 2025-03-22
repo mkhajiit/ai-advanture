@@ -1,5 +1,7 @@
 # AI 어드벤처
 
+배포중인 사이트:https://ai-advanture-git-main-mkhajiits-projects.vercel.app/
+
 ## Chat gpt api 를 활용하여 만든 선택지 자동 생성 웹 게임
 
 ## 일정
@@ -54,7 +56,9 @@ express
 배포 과정에서 CORS 에러와 서버와 통신을 못하는 에러가 발생해서 3시간 정도 소모함
 원인: 서버 배포 사이트인 RAILWAY에서 제공하는 URL은 프론트에서 뒤에 포트번호(:8080)을 붙이면 안됨 이미 포트번호가 할당되어 있는 url 이기 때문임
 (ai-advanture-production.up.railway.app/generate-story) 이런식으로 해야함
-배포중인 사이트:https://ai-advanture-git-main-mkhajiits-projects.vercel.app/
+
+핸드폰 환경에서 브라우저 툴바에 의해 위아래가 잘리는 문제가 발생함
+padding을 1rem으로 위아래로 추가해줘서 해결
 
 == 보안 ==
 

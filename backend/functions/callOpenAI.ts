@@ -37,9 +37,8 @@ async function callOpenAI(prompt: string): Promise<string | undefined> {
       console.log(`오픈api 통신오류 로그: ${error}`);
       if (attempt === retries) {
         // 마지막 시도에서 실패한 경우 return
-        return undefined; // 최대 시도 횟수 도달 시 undefined 반환
+        throw error;
       }
-      throw error;
     }
   }
 }

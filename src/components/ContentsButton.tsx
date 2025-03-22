@@ -36,7 +36,7 @@ const Button = styled.button<IButtonProps>`
     font-size: 0.8rem;
   }
 
-  // 화면 크기가 768px 이상일 때
+  // 화면 크기가 900px 이상일 때
   @media (min-width: 900px) {
     font-size: 1.4rem;
     height: 7.5rem;

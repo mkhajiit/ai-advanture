@@ -10,7 +10,7 @@ const Button = styled.button<IButtonProps>`
   display: block; /* 블록 요소로 만들어 줄바꿈 */
   width: 80%;
   margin: 0.5rem 0;
-  height: 4rem;
+  height: 4.5rem;
   background-color: ${({ $location }) =>
     MyStyles[$location].background}; // MyStyles에서 해당 location에 맞는 background을 가져옴
   color: ${({ $location }) =>
@@ -37,8 +37,9 @@ const Button = styled.button<IButtonProps>`
   }
 
   // 화면 크기가 768px 이상일 때
-  @media (min-width: 768px) {
-    font-size: 1.5rem;
+  @media (min-width: 900px) {
+    font-size: 1.4rem;
+    height: 7.5rem;
   }
 `;
 

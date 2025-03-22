@@ -12,7 +12,7 @@ export function endingPromptCaller(userChoices: string[]) {
   
   응답 예시:
   {
-    "text": "당신은 모험을 끝내고 깔끔한 결말을 맞이 하였습니다"
+    "text": "예시 텍스트"
   }
   
   최종적으로 JSON 형식으로만 응답해주세요.

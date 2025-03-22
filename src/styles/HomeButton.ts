@@ -29,7 +29,7 @@ export const HomeButton = styled.button`
     border-radius: 10px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     width: 8rem;
     height: 3.5rem;
     font-size: 1rem;

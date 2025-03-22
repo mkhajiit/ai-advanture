@@ -7,4 +7,13 @@ export const ContentsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* 기본적으로 세로 중앙 정렬 */
+  overflow: hidden;
+
+  @media (min-width: 480px) {
+    margin-top: 3.5rem;
+  }
+
+  @media (min-width: 900px) {
+  }
 `;

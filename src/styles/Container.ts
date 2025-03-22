@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { MyStyles, TypeKey } from '../constants';
 
-//MyStyles의 객체를 보고 원하는 색의 테마를 정하는 텍스트 컨테이너
+//MyStyles의 객체를 보고 원하는 색의 테마를 정하는 기능이 있는 텍스트 컨테이너
 export const TextContainer = styled.div<{ $firstChoice: TypeKey | null }>`
   width: 90%;
   display: flex;
@@ -19,7 +19,7 @@ export const TextContainer = styled.div<{ $firstChoice: TypeKey | null }>`
   /* 화면 크기가 768px 이상일 때 */
   @media (min-width: 768px) {
     width: 70%; /* 화면 크기가 768px 이상일 때 너비 50%로 설정 */
-    font-size: 1.5rem;
+    font-size: 1.8rem;
   }
 `;
 

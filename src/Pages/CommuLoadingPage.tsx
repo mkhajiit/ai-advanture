@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ErrorPage from './ErrorPage';
 
 const LoadingOverlay = styled.div`
   position: fixed; /* 화면 전체를 덮도록 변경 */
@@ -34,10 +35,16 @@ const Spinner = styled.div`
   }
 `;
 
-function CommuLoadingPage() {
+function CommuLoadingPage({
+  type,
+  handleOnClick,
+}: {
+  type: 'spinner' | 'error';
+  handleOnClick: (page: 'Main' | 'Contents') => void;
+}) {
   return (
     <LoadingOverlay>
-      <Spinner />
+      {type === 'spinner' ? <Spinner /> : <ErrorPage onClick={handleOnClick} />}
     </LoadingOverlay>
   );
 }

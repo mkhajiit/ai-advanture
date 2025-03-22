@@ -10,6 +10,7 @@ async function callOpenAI(prompt: string): Promise<string | undefined> {
 
   while (attempt < retries) {
     try {
+      throw new Error();
       const response = await axios.post(
         'https://api.openai.com/v1/chat/completions',
         {
@@ -39,6 +40,7 @@ async function callOpenAI(prompt: string): Promise<string | undefined> {
         // 마지막 시도에서 실패한 경우 return
         return undefined; // 최대 시도 횟수 도달 시 undefined 반환
       }
+      throw error;
     }
   }
 }

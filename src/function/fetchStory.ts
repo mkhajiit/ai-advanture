@@ -8,7 +8,8 @@ export async function fetchStroy(
   isLast: boolean,
   selectedChoices: string[],
   numberOfSelection: number,
-  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
+  setErrorOccurred: React.Dispatch<React.SetStateAction<boolean>>
 ) {
   try {
     setIsLoading(true);
@@ -22,6 +23,7 @@ export async function fetchStroy(
     return data.story;
   } catch (error) {
     console.log('오류 메시지:', error);
+    setErrorOccurred(true);
   } finally {
     setIsLoading(false);
   }

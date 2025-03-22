@@ -28,6 +28,7 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
   const [stage, setStage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isLastStage, setIsLastStage] = useState(false);
+  const [errorOccurred, setErrorOccurred] = useState(false);
 
   // 결말 스테이지 포함한 스테이지의 갯수
   const mayStage = 7;
@@ -48,7 +49,8 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
       isLastStage,
       updatedChoices,
       numberOfSelection,
-      setIsLoading
+      setIsLoading,
+      setErrorOccurred
     );
 
     updateStateAfterFetch(response);
@@ -85,7 +87,9 @@ function ContentsPage({ handleOnClick, handleBgImage, isBgLoading }: PageProps) 
   return (
     <>
       {isLoading || isBgLoading ? (
-        <CommuLoadingPage />
+        <CommuLoadingPage type='spinner' handleOnClick={handleOnClick} />
+      ) : errorOccurred ? (
+        <CommuLoadingPage type='error' handleOnClick={handleOnClick} />
       ) : (
         <ContentsContainer>
           <HomeButton onClick={() => handleOnClick('Main')}>

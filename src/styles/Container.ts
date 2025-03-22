@@ -8,7 +8,7 @@ export const TextContainer = styled.div<{ $firstChoice: TypeKey | null }>`
   justify-content: center;
   align-items: center;
   text-align: center;
-  margin: 4rem 2rem;
+  margin: 2.5rem 2rem;
   font-size: clamp(1rem, 5vw, 2rem);
   font-weight: 600;
   color: ${({ $firstChoice }) => ($firstChoice ? MyStyles[$firstChoice].textColor : 'black')};

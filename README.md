@@ -58,7 +58,8 @@ express
 (ai-advanture-production.up.railway.app/generate-story) 이런식으로 해야함
 
 핸드폰 환경에서 브라우저 툴바에 의해 위아래가 잘리는 문제가 발생함
-padding을 1rem으로 위아래로 추가해줘서 해결
+margin을 조정해서 overflow하는 컨테이너의 높이를 줄였음
+padding을 1rem으로 위아래로 추가해줬음
 
 == 보안 ==
 

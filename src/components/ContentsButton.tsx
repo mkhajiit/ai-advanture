@@ -9,7 +9,7 @@ interface IButtonProps {
 const Button = styled.button<IButtonProps>`
   display: block; /* 블록 요소로 만들어 줄바꿈 */
   width: 80%;
-  margin: 0.5rem 0;
+  margin: 0.5rem 0.4rem;
   height: 4.5rem;
   background-color: ${({ $location }) =>
     MyStyles[$location].background}; // MyStyles에서 해당 location에 맞는 background을 가져옴

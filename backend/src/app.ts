@@ -23,15 +23,27 @@ app.post('/generate-story', async (req, res) => {
   console.log(choice, isLast);
   console.log('지금까지의 선택지:', selectedChoices);
   console.log('선택지갯수:', numberOfSelection);
-  if (isLast) {
-    prompt = endingPromptCaller(selectedChoices);
-    console.log('엔딩 프롬프트 사용');
-  } else {
-    prompt = normalPromptCaller(selectedChoices, numberOfSelection);
+  try {
+    if (isLast) {
+      prompt = endingPromptCaller(selectedChoices);
+      console.log('엔딩 프롬프트 사용');
+    } else {
+      prompt = normalPromptCaller(selectedChoices, numberOfSelection);
+    }
+
+    const response = await callOpenAI(prompt);
+
+    // ai가 답변과 선택지를 만들지 못했을 경우 처리
+    if (response === undefined) {
+      return res.status(500).send({ message: 'AI 서비스에서 유효한 응답을 받지 못했습니다.' });
+    }
+    // 요청 처리 로직
+    res.send({ message: '성공적으로 처리되었습니다.', story: response });
+  } catch (error) {
+    console.error('서버 오류 발생:', error);
+    // 오류 발생 시 클라이언트에게 오류 메시지 전송
+    res.status(500).send({ message: '서버에서 오류가 발생했습니다. 다시 시도해 주세요.' });
   }
-  const response = await callOpenAI(prompt);
-  // 요청 처리 로직
-  res.send({ message: '성공적으로 처리되었습니다.', story: response });
 });
 
 app.listen(port, () => {

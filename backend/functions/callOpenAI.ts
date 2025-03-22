@@ -5,7 +5,7 @@ dotenv.config();
 
 async function callOpenAI(prompt: string): Promise<string | undefined> {
   // 오류발생시 재통신 횟수 설정
-  const retries = 3;
+  const retries = 5;
   let attempt = 0; // 시도 횟수 초기화
 
   while (attempt < retries) {
@@ -37,7 +37,7 @@ async function callOpenAI(prompt: string): Promise<string | undefined> {
       console.log(`오픈api 통신오류 로그: ${error}`);
       if (attempt === retries) {
         // 마지막 시도에서 실패한 경우 return
-        throw error;
+        return undefined;
       }
     }
   }

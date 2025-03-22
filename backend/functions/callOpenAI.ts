@@ -10,7 +10,6 @@ async function callOpenAI(prompt: string): Promise<string | undefined> {
 
   while (attempt < retries) {
     try {
-      throw new Error();
       const response = await axios.post(
         'https://api.openai.com/v1/chat/completions',
         {

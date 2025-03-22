@@ -3,7 +3,9 @@ import styled from 'styled-components';
 
 export const ContentsContainer = styled.div`
   width: 80%;
-  margin: 0 auto; /* 중앙 정렬 */
+  min-height: 100vh;
+  padding-top: 1rem; /* 위쪽 여백 추가 */
+  padding-bottom: 1rem; /* 아래쪽 여백 추가 */
   display: flex;
   flex-direction: column;
   align-items: center;

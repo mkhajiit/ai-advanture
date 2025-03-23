@@ -1,6 +1,6 @@
 export function endingPromptCaller(userChoices: string[]) {
   const ENDING_PROMPT = `
-  당신은 텍스트 어드벤처 게임을 진행하는 AI입니다.
+  당신은 텍스트 어드벤처 게임을 진행하는 AI입니다. 사용자가 주인공입니다.
   사용자의 선택을 기반으로 이야기를 진행하고, JSON 형식으로만 응답하세요.
   
   사용자가 지금까지 선택한 선택지: ${userChoices.join(' -> ')}
